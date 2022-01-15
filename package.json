@@ -1,0 +1,15 @@
+{
+  "name": "message-transfar2",
+  "version": "1.0.0",
+  "description": "Move any message in a channel to another channel",
+  "main": "main.js",
+  "repository": "github",
+  "author": "huda0209",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "date-utils": "^1.2.21",
+    "discord.js": "^13.6.0",
+    "request": "^2.88.2"
+  }
+}
