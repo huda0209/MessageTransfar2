@@ -45,7 +45,7 @@ let guildData = config.loadConfig("guildData.json");
 //start the bot
 client.on("ready", message => {
 	logger.info(`bot is ready! ver. ${BOT_DATA.VERSION} \n        login: {cyan}${client.user.tag}{reset}\n`);
-  	client.user.setActivity(`${BOT_DATA.PREFIX}${BOT_DATA.COMMAND} helpでヘルプを表示 ver. ${BOT_DATA.VERSION}`, { type: 'PLAYING' });
+  	client.user.setActivity(`${BOT_DATA.PREFIX}${BOT_DATA.COMMAND} helpでヘルプを表示 ver. ${require("./package.json").version}`, { type: 'PLAYING' });
 });
 
 //message event
