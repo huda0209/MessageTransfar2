@@ -1,11 +1,11 @@
 /*
 created by huda0209
-discord-bot-template
+messageTransfar2
 
 resource.js
  
 ran by node.js
-2021-8-24
+2022-1-16
 */
 
 /*
@@ -28,11 +28,6 @@ module.exports =  {
             },
             DIV_TOKEN : {
                 canEmpty : true,
-                replace : false,
-                default : ""
-            },
-            VERSION : {
-                canEmpty : false,
                 replace : false,
                 default : ""
             },
