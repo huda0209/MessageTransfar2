@@ -67,18 +67,7 @@ async function run([command, ...args],message,guildData,BOT_DATA,client){
         log.error(`The process was aborted because the argument was not a number. argment:${args[3]} ProcessCount:${processCount}`);
         return;
     }
-    
-    const webhook = await client.channels.cache.get(toChannelId).createWebhook("msgTransfar")
-        .then(webhook=>{
-            log.info(`ProcessCount:${processCount} Succeed to create webhook.`);
-            return webhook;
-        })
-        .catch(e=>{
-                message.channel.send({embeds: [embedContent.error(`webhookリンクの作成に失敗しました。権限を確認してください。`)]});
-                log.error(`ProcessCount:${processCount}\n${e}`);
-        })
-    if(!webhook) return;
-    
+  
 
     const msgid = args[1];
     let firstFeachMessage = null;
@@ -99,6 +88,19 @@ async function run([command, ...args],message,guildData,BOT_DATA,client){
     feachMessages.set(msgid, firstFeachMessage);
     
     const feachMessagesID = feachMessages.map(key=>{return key.id}).reverse();
+
+
+    const webhook = await client.channels.cache.get(toChannelId).createWebhook("msgTransfar")
+        .then(webhook=>{
+            log.info(`ProcessCount:${processCount} Succeed to create webhook.`);
+            return webhook;
+        })
+        .catch(e=>{
+                message.channel.send({embeds: [embedContent.error(`webhookリンクの作成に失敗しました。権限を確認してください。`)]});
+                log.error(`Failed to create webhook. ProcessCount:${processCount}\n${e}`);
+        })
+    if(!webhook) return;
+
 
     await Promise.all(feachMessagesID.map(async key => {
         const obj = feachMessages.get(key);
