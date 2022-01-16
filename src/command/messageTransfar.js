@@ -5,7 +5,7 @@ MessageTransfar2 for discord bot
 
 ran by node.js
 
-2022-1-15
+2022-1-16
 
 */
 "use strict"
