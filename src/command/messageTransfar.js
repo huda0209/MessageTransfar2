@@ -104,17 +104,17 @@ async function run([command, ...args],message,guildData,BOT_DATA,client){
 
     await Promise.all(feachMessagesID.map(async key => {
         const obj = feachMessages.get(key);
-
-        let content;
-        if(obj.attachments&&obj.attachments.first()){
-            content = obj.content+obj.attachments.first().url;
-        }else content = obj.content;
-
+        
         const option = {
             username: `${obj.author.username} (${(new Date(obj.createdTimestamp)).toFormat("YYYY/MM/DD HH24:MI")})`,
             avatarURL: `https://cdn.discordapp.com/avatars/${obj.author.id}/${obj.author.avatar}.webp`,
-            content : content
         };
+
+        if(obj.content){
+            option["embeds"] = obj.embeds;
+            option["content"] = obj.attachments&&obj.attachments.first() ?  obj.content+obj.attachments.first().url : obj.content;
+        }else option["embeds"] = obj.embeds;
+
         if(toChannelThreadId) option.threadId = toChannelThreadId;
 
         await webhook.send(option)
