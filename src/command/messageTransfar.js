@@ -18,7 +18,7 @@ let processCount = 0;
 
 async function run([command, ...args],message,guildData,BOT_DATA,client){
     processCount++;
-    log.info(`ProcessCount: ${processCount}, Guild: ${message.guild.name}(${message.guild.id}, fromCh:${message.channel.name}(${message.channel.id})`)
+    log.info(`ProcessCount: ${processCount}, Guild: ${message.guild.name}(${message.guild.id}, fromCh:${message.channel.name}(${message.channel.id}) toChId:${args[2]}`);
     if(!args[1]){
         message.channel.send({embeds: [embedContent.error(`引数が足りません。\n${BOT_DATA.PREFIX}mt run <移行する最初のメッセージのid> <移行先のチャンネルid> <移行するメッセージ数>`)]});
         log.error(`The process was aborted because there were no required arguments. Require argument "messageID" in messageTransfar. ProcessCount:${processCount}`);
@@ -46,7 +46,7 @@ async function run([command, ...args],message,guildData,BOT_DATA,client){
         if(toChannel.isThread()) throw Error(`This is the THREAD! ch:${toChannel.name}(${toChannel.id}`);
     }catch(e){
         message.channel.send({embeds: [embedContent.error(`チャンネルの取得に失敗しました。指定したidが正しいか確認してください。`)]});
-        log.error(`ProcessCount:${processCount}\n${e}`);
+        log.error(`Failed to get a channel. ProcessCount:${processCount}\n${e}`);
         return;
     }
     
@@ -75,7 +75,7 @@ async function run([command, ...args],message,guildData,BOT_DATA,client){
         firstFeachMessage = await message.channel.messages.fetch(msgid);
     }catch(e){
         message.channel.send({embeds: [embedContent.error(`先頭のメッセージの取得に失敗しました。\nコマンドを送信したチャンネルと先頭メッセージがあるチャンネルが一致しているか確認してください。`)]});
-        log.error(`ProcessCount:${processCount}\nid: ${msgid}\n${e}`);
+        log.error(`Failed to get a message. ProcessCount:${processCount}\nid: ${msgid}\n${e}`);
         return;
     }
     const limit = args[3]-1;
@@ -96,7 +96,7 @@ async function run([command, ...args],message,guildData,BOT_DATA,client){
             return webhook;
         })
         .catch(e=>{
-                message.channel.send({embeds: [embedContent.error(`webhookリンクの作成に失敗しました。権限を確認してください。`)]});
+                message.channel.send({embeds: [embedContent.error(`webhookリンクの作成に失敗しました。権限、webhookの数を確認してください。`)]});
                 log.error(`Failed to create webhook. ProcessCount:${processCount}\n${e}`);
         })
     if(!webhook) return;
@@ -130,7 +130,7 @@ async function run([command, ...args],message,guildData,BOT_DATA,client){
         })
         .catch(e=>{
             message.channel.send({embeds: [embedContent.error(`webhookの削除に失敗したため、手動で削除してください。`)]});
-            log.error(`ProcessCount:${processCount}\n${e}`);
+            log.error(`Failed to delete webhook. ProcessCount:${processCount}\n${e}`);
         });
         
     message.channel.send({embeds: [embedContent.info(`全てのメッセージの転送が完了しました。`)]});
