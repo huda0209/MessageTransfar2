@@ -2,7 +2,7 @@
 /node_modules/
 
 #bots config
-./config
+/config/
 
 #log files
 ./logs/

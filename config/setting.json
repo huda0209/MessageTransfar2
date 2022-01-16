@@ -1,8 +1,0 @@
-{
-    "NAME" : "MessageTansfar2",
-    "MAIN_TOKEN" : "",
-    "DIV_TOKEN" : "",
-    "VERSION" : "1.1.0",
-    "PREFIX" : "//",
-    "COMMAND" : "mt"
-}
