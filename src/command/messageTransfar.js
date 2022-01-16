@@ -45,7 +45,7 @@ async function run([command, ...args],message,guildData,BOT_DATA,client){
         toChannel = client.channels.cache.get(toChannelId);
         if(toChannel.isThread()) throw Error(`This is the THREAD! ch:${toChannel.name}(${toChannel.id}`);
     }catch(e){
-        message.channel.send({embeds: [embedContent.error(`チャンネルの取得に失敗しました。指定したidが正しいか確認してください。`)]});
+        message.channel.send({embeds: [embedContent.error(`チャンネルの取得に失敗しました。指定したidが正しいか、書式が適切か確認してください。`)]});
         log.error(`Failed to get a channel. ProcessCount:${processCount}\n${e}`);
         return;
     }
