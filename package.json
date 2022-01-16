@@ -1,6 +1,6 @@
 {
   "name": "message-transfar2",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Move any message in a channel to another channel",
   "main": "main.js",
   "repository": "github",
